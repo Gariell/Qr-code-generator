@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR-code generator</title>
+  <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body >
+
+  <div class="container">
+
+    <h1 class="title"> QR-Gen </h1>
+    <p>Сгенерируйте собственный QR-code</p>
+
+    <div class="row qrCode-inputGroup">
+      <input type="text" class="qrCode--input"> 
+      <button class="qrCode--btnGenerate" disabled onclick="generate()">GO</button>
+    </div>
+    
+    <div class="row qrCode-radio">
+      <input type="radio" name="qrCode--format" id="formatPng" value="png" checked onclick="toggleFormat(this.value)"> PNG
+      <input type="radio" name="qrCode--format" id="formatSvg" value="svg" onclick="toggleFormat(this.value)"> SVG
+    </div>
+
+    <img src='' class="qrCode--image">
+    <button class="qrCode--btnDownload" onclick="downloadImage()">СКАЧАТЬ</button>
+
+  </div>
+
+
+  <script src="./js/script.js"></script>
+  <script>
+    parametersJson = {
+      "size": 500, 
+      "backgroundColor": "255-255-255", 
+      "qrColor": "38-38-38", 
+      "padding": 0, 
+      "data": "dev.to"
+    };
+  </script>
+</body>
+</html>
