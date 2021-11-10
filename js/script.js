@@ -25,7 +25,7 @@ input.addEventListener('keydown', function (e) { if (e.keyCode === 13)  generate
 
 //смена формата
 function toggleFormat(p) {
-  if ( btnGenerate.hasAttribute('disabled') || radioDisabled == true)   format = p; else if (parametersJson.format != p ) format = p; generate(); 
+  if ( btnGenerate.hasAttribute('disabled') || radioDisabled == true || format == '') format = p; else { format = p; generate();  }
 }
 
 // функция генерации
