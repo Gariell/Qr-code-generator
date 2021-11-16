@@ -1,77 +1,26 @@
-* {
+*, ::after, ::before {
   box-sizing: border-box;
-  
 }
 body {
   font-family: Roboto, sans-serif;
+  font-weight: bold;
 }
 button {
-  flex: 1;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 5px 0;
   border: none;
-}
-p {
-  font-size: 18px;
+  font-weight: bold;
 }
 img {
   width: 100%;
-  background: rgb(38, 38, 38)
 }
-.container {
-  width: 100%;
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
+label {
+  margin-left: 3px;
 }
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.qrCode-inputGroup {
-  margin-bottom: 10px;
+input {
+  margin: 0;
+  font-weight: bold;
 }
 .title {
-  margin: 0;
-}
-.qrCode--input {
-  width: 75%;
-  border-radius: 0px;
-  border: 5px solid rgb(38, 38, 38);
-  background: #ffffff;
-}
-.qrCode--input:focus-visible {
-  border-radius: 0px;
-  outline: none;
-}
-
-.qrCode-radio {
-  font-size: 14px ;
-  align-items: center;
-  margin: 0;
-  margin-bottom: 30px;
-  z-index: -1;
-  opacity: 0.6;
-}
-.qrCode-radio.active {
-  z-index: 1;
-  opacity: 1;
-}
-.qrCode-radio input {
-  margin: 0 5px 0 10px ;
-}
-.qrCode-radio input:first-child {
-  margin-left: 2px;
-}
-.qrCode--btnGenerate {
-  margin-left: 10px;
-}
-.qrCode--btnDownload {
-  display: none;
-  font-size: 12px;
-  font-weight: 700;
+  margin: 0 0 5px;
 }

@@ -1,44 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QR-code generator</title>
-  <link rel="stylesheet" href="css/style.css"> 
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/qrstyle.css">
 </head>
-<body >
 
-  <div class="container">
+<body>
 
-    <h1 class="title"> QR-Gen </h1>
-    <p>Сгенерируйте собственный QR-code</p>
+  <div class="qrCode-container ">
+    <div class="qrCode-wrapper">
 
-    <div class="row qrCode-inputGroup">
-      <input type="text" class="qrCode--input"> 
-      <button class="qrCode--btnGenerate" disabled onclick="generate()">GO</button>
+      <h1 class="title"> QR-Gen </h1>
+      <div class="qrCode-row qrCode-inputGroup">
+        <input type="text" class="qrCode--input" value="https://krizganovskiy.ru">
+        <button class="qrCode--btn-generate" onclick="generate()">GO</button>
+      </div>
+
+      <div class="qrCode-row qrCode-radioGroup">
+        <div class="qrCode-radio"> Format: </div>
+        <div class="qrCode-radio">
+          <input type="radio" name="qrCode--format" id="qrCode--radio-formatPng" value="png"
+            onclick="toggleFormat(this.value)">
+          <label for="qrCode--radio-formatPng">PNG</label>
+        </div>
+        <div class="qrCode-radio">
+          <input type="radio" name="qrCode--format" id="qrCode--radio-formatSvg" value="svg" checked
+            onclick="toggleFormat(this.value)">
+          <label for="qrCode--radio-formatSvg">SVG</label>
+        </div>
+        <div class="qrCode-radio">
+          <input type="radio" name="qrCode--format" id="qrCode--radio-formatGif" value="gif"
+            onclick="toggleFormat(this.value)">
+          <label for="qrCode--radio-formatGif">GIF</label>
+        </div>
+      </div>
+
+      <div class="qrCode-row qrCode-radioGroup">
+        <div class="qrCode-radio"> EEC: </div>
+        <div class="qrCode-radio">
+          <input type="radio" name="qrCode--eec" id="qrCode--radio-eecL" value="L" checked
+            onclick="toggleEcc(this.value)">
+          <label for="qrCode--radio-eecL">L</label>
+        </div>
+        <div class="qrCode-radio">
+          <input type="radio" name="qrCode--eec" id="qrCode--radio-eecM" value="M" onclick="toggleEcc(this.value)">
+          <label for="qrCode--radio-eecM">M</label>
+        </div>
+        <div class="qrCode-radio">
+          <input type="radio" name="qrCode--eec" id="qrCode--radio-eecQ" value="Q" onclick="toggleEcc(this.value)">
+          <label for="qrCode--radio-eecQ">Q</label>
+        </div>
+        <div class="qrCode-radio">
+          <input type="radio" name="qrCode--eec" id="qrCode--radio-eecH" value="H" onclick="toggleEcc(this.value)">
+          <label for="qrCode--radio-eecH">H</label>
+        </div>
+      </div>
+
+      <img src='' class="qrCode--image">
+      <button class="qrCode--btn-download" onclick="downloadImage()">DOWNLOAD</button>
+
     </div>
-    
-    <div class="row qrCode-radio">
-      <input type="radio" name="qrCode--format" id="formatPng" value="png" checked onclick="toggleFormat(this.value)"> PNG
-      <input type="radio" name="qrCode--format" id="formatSvg" value="svg" onclick="toggleFormat(this.value)"> SVG
-    </div>
-
-    <img src='' class="qrCode--image">
-    <button class="qrCode--btnDownload" onclick="downloadImage()">СКАЧАТЬ</button>
-
   </div>
 
-
   <script src="./js/script.js"></script>
-  <script>
-    parametersJson = {
-      "size": 500, 
-      "backgroundColor": "255-255-255", 
-      "qrColor": "38-38-38", 
-      "padding": 0, 
-      "data": "dev.to"
-    };
-  </script>
 </body>
+
 </html>

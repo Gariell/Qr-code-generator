@@ -1,61 +1,65 @@
-let parameters
-let parametersJson
-let btnGenerate = document.querySelector("button.qrCode--btnGenerate");
-let btnDownload = document.querySelector("button.qrCode--btnDownload");
-let input = document.querySelector("input.qrCode--input");
-let img = document.querySelector("img.qrCode--image");
-let radioBtns = document.querySelector(".qrCode-radio");
-let radioDisabled = true
-let format
+// https://goqr.me/api/
 
-// убрать атрибут disabled с кнопки
-input.addEventListener('input', e => {
-  if (input.value != "") {
-    btnGenerate.removeAttribute('disabled'); 
-    radioBtns.classList.add('active');
-  }
-  if (input.value == "") {
-    btnGenerate.setAttribute('disabled', ''); 
-    radioBtns.classList.remove('active');
-  }
+let parameters
+const btnGenerate = document.querySelector("button.qrCode--btn-generate");
+const btnDownload = document.querySelector("button.qrCode--btn-download");
+const input = document.querySelector("input.qrCode--input");
+const qrImage = document.querySelector("img.qrCode--image");
+const radioBtns = document.querySelector(".qrCode-radioGroup");
+let format = 'svg'
+let parametersJson = {
+  "data": "dev.to",
+  "ecc": "1",
+  "size": 380,
+  "backgroundColor": "255-255-255",
+  "qrColor": "38-38-38",
+  "padding": 1,
+};
+
+
+
+input.addEventListener('keydown', function (e) {
+  if (e.keyCode === 13) generate()
 });
 
-// генерания по кнопке Enter
-input.addEventListener('keydown', function (e) { if (e.keyCode === 13)  generate() });
+window.addEventListener('load', function () {
+  generate()
+})
 
-//смена формата
 function toggleFormat(p) {
-  if ( btnGenerate.hasAttribute('disabled') || radioDisabled == true || format == '') format = p; else { format = p; generate();  }
+  format = p;
+  generate();
 }
 
-// функция генерации
-function generate(){
-  radioDisabled = false
+function toggleEcc(p) {
+  parametersJson.ecc = p
+  generate();
+}
+
+function generate() {
   parametersJson.format = format
-  parametersJson.data = input.value || "dev.to";
-  parameters = `size=${parametersJson.size}&bgcolor=${parametersJson.backgroundColor}&color=${parametersJson.qrColor}&qzone=${parametersJson.padding}&data=${parametersJson.data}&format=${parametersJson.format}`
-  img.src = `https://api.qrserver.com/v1/create-qr-code/?${parameters}`
-  btnDownload.style.display = "block"
+  parametersJson.data = input.value || "https://krizganovskiy.ru";
+  parameters = `size=${parametersJson.size}&bgcolor=${parametersJson.backgroundColor}&color=${parametersJson.qrColor}&qzone=${parametersJson.padding}&data=${parametersJson.data}&format=${parametersJson.format}&ecc=${parametersJson.ecc}`
+  qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?${parameters}`
 }
 
-// функция скачки 
 function downloadImage() {
   (function () {
-    let images = [].slice.call(document.querySelectorAll('img'));
     try {
-      images.forEach(function (img) {
-        downloadResource(img.src)
-      })
+      downloadResource(qrImage.src)
     } catch (e) {
-      alert("Download failed."); console.log('Download failed.', e);
+      alert("Download failed.");
+      console.log('Download failed.', e);
     }
+
     function forceDownload(blob) {
       let a = document.createElement('a');
       a.download = "QR-code";
       a.href = blob;
       a.click()
     }
-    function downloadResource(url, filename) {
+
+    function downloadResource(url) {
       fetch(url, {
         headers: new Headers({
           'Origin': location.origin
